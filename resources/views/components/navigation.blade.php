@@ -1,0 +1,37 @@
+<div>
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+        <li><a href="#!">Logout</a></li>
+      </ul>
+
+
+      <nav class="white">
+       <div class="container">
+        <div class="nav-wrapper">
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons teal-text">menu</i></a>
+
+            <a href="#!" class="brand-logo teal-text">Logo</a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="#" class="teal-text">Housing</a></li>
+              <li><a href="#" class="teal-text">How it Works</a></li>
+              @if (Route::has('login'))
+          
+                  @auth
+                  <li><a class="dropdown-trigger teal-text" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right teal-text">arrow_drop_down</i></a></li>
+                  @else
+                      <strong><li><a href="{{ route('login') }}" class="teal-text" style="font-weight: bold">Log in</a></li>
+
+                      @if (Route::has('register'))
+                      <li><a href="{{ route('register') }}" class="teal-text" style="font-weight: bold">Register</a></li>
+                      @endif
+                  @endauth
+ 
+          @endif
+            </ul>
+          </div>
+       </div>
+      </nav>
+
+    <!-- SIDE NAV COMPONENT -->  
+    <x-side-nav />
+</div>
