@@ -3,6 +3,8 @@ $(document).ready(function(){
     $(".dropdown-trigger").dropdown();
     $('.slider').slider();
     $('.materialboxed').materialbox();
+    $('.modal').modal();
+
 
   });
   var $grid = $('.grid').masonry({
