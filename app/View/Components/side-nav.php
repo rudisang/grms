@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class side-nav extends Component
+class sidenav extends Component
 {
     /**
      * Create a new component instance.
