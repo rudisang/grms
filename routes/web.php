@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard/select-account', [DashboardController::class, 'SelectAccount']);
+Route::post('/dashboard/assign-role', [DashboardController::class, 'assignRole']);
+
+Route::resource('/dashboard', DashboardController::class);
 
 require __DIR__.'/auth.php';
