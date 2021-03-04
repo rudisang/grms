@@ -43,9 +43,4 @@
         </div>
     </section>
     
-    @foreach ($roles as $role)
-        <P>{{$role->role}}</P>
-    @endforeach
-
-    {{$roles[0]->id}}
 @endsection
