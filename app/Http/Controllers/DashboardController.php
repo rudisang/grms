@@ -30,11 +30,13 @@ class DashboardController extends Controller
     }
 
     public function SelectAccount(){
+        $roles = Role::all();
+
         if(Auth::user()->role_id){
             return view('dashboard.index');
     
         }else{
-            return view('dashboard.select-account');
+            return view('dashboard.select-account')->with('roles', $roles);
         }
     }
 
