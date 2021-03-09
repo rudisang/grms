@@ -1,13 +1,17 @@
 @extends('layouts.main')
 
 @section('content')
-    <nav class="white">
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="#!" class="breadcrumb teal-text">Dashboard</a>
-            </div>
-        </div>
-    </nav>
+<nav class="white">
+  <div class="container">
+      <div class="nav-wrapper">
+          <a href="#!" class="breadcrumb teal-text">Dashboard</a>
+      </div>
+  </div>
+</nav>
+
+    <section class="container">
+      <x-flash-messages />
+    </section>
 
     <section class="container">
         @if(Auth::user()->role_id == 1)
@@ -36,6 +40,9 @@
         @elseif(Auth::user()->role_id == 2)
         <!-- Landlord Dashboard Views -->
             <h2>I am a landlord yaay</h2>
+
+            @elseif(Auth::user()->role_id == 3)
+            <x-admin-user-table />
         @endif
     </section>
     

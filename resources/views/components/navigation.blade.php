@@ -1,6 +1,7 @@
 <div>
     <ul id="dropdown1" class="dropdown-content">
         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url('/dashboard/account') }}">My Account</a></li>
         <form method="POST" action="{{ route('logout') }}"><li> 
 <a href="{{route('logout')}}" onclick="event.preventDefault();
           this.closest('form').submit();">Logout</a>
