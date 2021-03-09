@@ -1,6 +1,9 @@
 $(document).ready(function(){
     $('.sidenav').sidenav();
-    $(".dropdown-trigger").dropdown();
+    $(".dropdown-trigger").dropdown({
+      coverTrigger : false,
+      constrainWidth : false,
+    });
     $('.slider').slider();
     $('.materialboxed').materialbox();
     $('.modal').modal();

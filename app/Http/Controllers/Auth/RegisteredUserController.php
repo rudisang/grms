@@ -32,11 +32,13 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        $limit = date("2003-12-30");
         $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'gender' => 'required|string|max:255',
-            'age' => 'required',
+            'mobile' => 'required',
+            'age' => 'required|date|before:'.$limit,
             'role_id' => 'nullable',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
@@ -45,6 +47,7 @@ class RegisteredUserController extends Controller
         Auth::login($user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
+            'mobile' => $request->mobile,
             'gender' => $request->gender,
             'age' => $request->age,
             'email' => $request->email,
