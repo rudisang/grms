@@ -156,4 +156,35 @@
   </div>
     </section>
 
+    <section>
+      <div class="fixed-action-btn">
+        <a href="#delete" class="btn-floating btn-large red tooltipped modal-trigger" data-position="left" data-tooltip="delete user">
+          <i class="large material-icons">delete</i>
+        </a>
+      </div>
+
+      <!-- Modal Structure -->
+      <div id="delete" class="modal bottom-sheet yellow" style="width:50vw">
+        <div class="modal-content">
+         
+          <div class="container">
+            <h4>⚠️ Warning!</h4>
+            <p>Are you sure you want to delete this account?</p>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">No</a>
+            <form style="display: inline" method="POST" action="/dashboard/account/user/{{$user->id}}">
+              {{method_field('DELETE')}}
+              @csrf
+              <button type="submit" class="btn red">Yes</button>
+  
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer yellow darken-1">
+          
+          
+        </div>
+      </div>
+      
+    </section>
+
 @endsection
