@@ -7,6 +7,8 @@ $(document).ready(function(){
     $('.slider').slider();
     $('.materialboxed').materialbox();
     $('.modal').modal();
+    $('.fixed-action-btn').floatingActionButton();
+    $('.tooltipped').tooltip();
 
 
   });

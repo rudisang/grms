@@ -21,15 +21,18 @@
     
             <tbody>
                 @foreach($users as $user)
-                <tr>
+                  @if($user->role_id !== 3)
+                  <tr>
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}} {{$user->surname}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role->role}}</td>
                     <td><a href="/dashboard/account/user/{{$user->id}}" class="btn purple">manage user</a></td>
                   </tr>
-                @endforeach
+                  @endif
 
+                @endforeach
+              
             </tbody>
           </table>
     </div>
