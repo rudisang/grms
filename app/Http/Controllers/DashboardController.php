@@ -220,9 +220,70 @@ class DashboardController extends Controller
 		$user = User::find($id);
       
         $user->delete();
+        $user->landlordaccount->delete();
  
         return redirect('/dashboard')->with("success", "User ".$user->name." ".$user->surname." was successfully Deleted");
 
+    }
+
+    public function landlordResubmission(Request $request, $id){
+        
+
+        $request->validate([
+            'avatar' => 'image|nullable|max:1999',
+            'omang'=> 'required',
+            'utility_doc' => 'required',
+            'occupation'=> 'required|string|max:255',
+            'employer'=> 'required|string|max:255',
+            'employer_email' => 'required|string|email|max:255',
+            'address'=> 'required|string|max:255',
+            'bio'=> 'required',
+        ]);
+       
+       
+
+        if($request->hasFile('avatar')){
+            $avatar = $request->avatar->getClientOriginalName().time().'.'.$request->avatar->extension();  
+          // $request->avatar->public_path('avatars', $avatar);
+          $request->avatar->move(public_path('avatars'), $avatar);
+
+
+        } else {
+            $avatar = 'noimage.jpg';
+        }
+
+        if($request->hasFile('omang')){
+            $omang = $request->omang->getClientOriginalName().time().'.'.$request->omang->extension();  
+       //$request->omang->public_path('documents', $omang);
+       $request->omang->move(public_path('documents'), $omang);
+       
+        }
+        
+        if($request->hasFile('utility_doc')){
+            $utility_doc = $request->utility_doc->getClientOriginalName().time().'.'.$request->utility_doc->extension();  
+          // $request->utility_doc->public_path('documents', $utility_doc);
+          $request->utility_doc->move(public_path('documents'), $utility_doc);
+        }
+        
+
+        $account = Landlord::find($id);
+
+        $account->avatar = $avatar;
+        $account->omang = $omang;
+        $account->utility_doc = $utility_doc;
+        $account->occupation = $request->occupation;
+        $account->employer = $request->employer;
+        $account->employer_email = $request->employer_email;
+        $account->address = $request->address;
+        $account->bio = $request->bio;
+        $account->status_id = 1;
+        $account->message = null;
+        $account->user_id = Auth::user()->id;
+        
+       
+        $account->save();
+        
+        return redirect('/dashboard')->with("success", "Resubmission Successful");
     }
 
     public function index()

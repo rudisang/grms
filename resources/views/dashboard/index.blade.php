@@ -71,19 +71,15 @@
                           <div class="white-text" role="alert">
                               <h5>🛈 Your Account has been rejected</h5>
                             </div>
-                            
-                      
-                            <ul class="collapsible" style="border:none">
-                              <li>
-                                <div class="collapsible-header red lighten-1 white-text"><i class="material-icons white-text">info</i><strong>Reason</strong></div>
-                                <div class="collapsible-body"><p class="white-text">Please make not of the requested changes and resubmit for review.</p>
-                                  <p class="white-text">{{Auth::user()->landlordaccount->message}}</p></div>
-                              </li>
-                            </ul>
-                     
-                          
-                      </div>
 
+                      </div>
+                      <ul class="collapsible" style="border:none">
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons black-text">info</i><strong>Reason</strong></div>
+                          <div class="collapsible-body"><p class="black-text">Please make not of the requested changes and resubmit for review.</p>
+                            <p class="black-text">{{Auth::user()->landlordaccount->message}}</p></div>
+                        </li>
+                      </ul>
                       <x-admin-edit-user-account />
 
                 @elseif(Auth::user()->landlordaccount->status_id == 4)
