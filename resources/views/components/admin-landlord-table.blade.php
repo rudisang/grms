@@ -1,5 +1,6 @@
 <div>
     <div class="card-panel">
+      <h4>Landlord Accounts</h4>
         <table>
             <thead>
               <tr>
@@ -11,8 +12,8 @@
                    
                      
                         <div class="input-field col s6">
-                            <input id="search" name="search" type="search" class="validate">
-                            <label for="search">Search</label>
+                            <input id="accounts" name="accounts" type="search" class="validate">
+                            <label for="accounts">Search</label>
                           </div>
                       </form>
                     </th>

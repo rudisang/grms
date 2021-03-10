@@ -3,10 +3,10 @@
 
             <div class="card-panel">
            
-                <h4>Landlord Account</h4>
+                <h4>Update Account</h4>
             
-              <form action="/dashboard/account/create-landlord" method="POST" enctype="multipart/form-data">
-               
+              <form action="/dashboard/account/resubmit-landlord/{{Auth::user()->landlordaccount->id}}" method="POST" enctype="multipart/form-data">
+                {{ method_field('PATCH') }}
                 @csrf
                 <div class="row">
                     <div class="input-field file-field col s12 m6">
@@ -63,12 +63,13 @@
                     
                     <div class="input-field col s12 m6">
                         <select name="occupation" style="display: block" required>
-                             <option value="" selected='selected' disabled>Select Occupation</option>
-                             <option value="Student">Student</option>
-                             <option value="Employed">Employed</option>
-                             <option value="Unemployed">Unemployed</option>
-                             <option value="Self_Employed">Self Employed</option>
-                             <option value="Retired">Retired</option>
+                            <?php $arr = ['Student','Employed', 'Unemployed', 'Self_Employed', 'Retired']; ?>
+                            <option value=""disabled>Select Occupation</option>
+                            @foreach($arr as $item)
+                               <option value="{{ $item }}" @if(Auth::user()->landlordaccount->occupation === $item) selected='selected' @endif> {{ $item }}</option>
+                            @endforeach
+                             
+                          
                        
                         </select>
                         @if ($errors->has('occupation'))
@@ -82,7 +83,7 @@
         
                   <div class="row">
                     <div class="input-field col s12 m6">
-                      <input name="employer" id="disabled" value="{{old('employer')}}" type="text" class="validate">
+                      <input name="employer" id="disabled" value="{{Auth::user()->landlordaccount->employer}}" type="text" class="validate">
                       <label for="disabled">Employer Name</label>
                                 @if ($errors->has('employer'))
                                 <span class="help-block">
@@ -93,7 +94,7 @@
     
                     
                         <div class="input-field col s12 m6">
-                          <input name="employer_email" id="disabled2" value="{{old('employer_email')}}" type="email" class="validate">
+                          <input name="employer_email" id="disabled2" value="{{Auth::user()->landlordaccount->employer_email}}" type="email" class="validate">
                           <label for="disabled2">Employer Email</label>
                           @if ($errors->has('employer_email'))
                           <span class="help-block">
@@ -103,7 +104,7 @@
                         </div>
         
                         <div class="input-field col s12 m6">
-                            <input name="address" id="disabled3" value="{{old('address')}}" type="text" class="validate">
+                            <input name="address" id="disabled3" value="{{Auth::user()->landlordaccount->address}}" type="text" class="validate">
                             <label for="disabled3">Address</label>
                             @if ($errors->has('address'))
                             <span class="help-block">
@@ -113,7 +114,7 @@
                           </div>
     
                           <div class="input-field col s12 m6">
-                            <textarea name="bio" id="textarea2" class="materialize-textarea" data-length="250">{{old('bio')}}</textarea>
+                            <textarea name="bio" id="textarea2" class="materialize-textarea" data-length="250">{{Auth::user()->landlordaccount->bio}}</textarea>
                             <label for="textarea2">Short Bio</label>
                             @if ($errors->has('bio'))
                             <span class="help-block">
@@ -124,7 +125,7 @@
         
                   </div>
              
-                <button href="#" class="btn teal">Create Account</button>
+                <button href="#" class="btn teal">Save</button>
               </form>
             </div>
           </div>

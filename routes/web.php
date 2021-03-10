@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard/account/landlord/{id}', [DashboardController::class, 'editLandlord']);
 Route::patch('/dashboard/account/landlord/{id}', [DashboardController::class, 'landlordAction']);
+Route::patch('/dashboard/account/resubmit-landlord/{id}', [DashboardController::class, 'landlordResubmission']);
+
 
 Route::get('/dashboard/account/create-landlord', [DashboardController::class, 'landlordForm']);
 Route::get('/dashboard/account', [DashboardController::class, 'editAccount']);

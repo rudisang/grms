@@ -24,9 +24,14 @@ class AdminLandlordTable extends Component
      */
     public function render()
     {
-       
+        if(request()->has('accounts')){
+            $search = request()->get('accounts');
+            $landlords = Landlord::join('users', 'users.id', '=', 'landlords.user_id')
+            ->where('name', 'like', '%'.$search.'%')->orWhere('status_id', 'like', '%'.$search.'%')
+            ->paginate(10);
+          }else{
             $landlords = Landlord::orderBy('created_at','desc')->paginate(10);
-          
+          }          
         
         return view('components.admin-landlord-table')->with('landlords', $landlords);
     }
