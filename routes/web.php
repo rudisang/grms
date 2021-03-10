@@ -18,12 +18,18 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard/account/landlord/{id}', [DashboardController::class, 'editLandlord']);
+Route::patch('/dashboard/account/landlord/{id}', [DashboardController::class, 'landlordAction']);
+
+Route::get('/dashboard/account/create-landlord', [DashboardController::class, 'landlordForm']);
 Route::get('/dashboard/account', [DashboardController::class, 'editAccount']);
 Route::get('/dashboard/account/user/{id}', [DashboardController::class, 'editUser']);
 Route::delete('/dashboard/account/user/{id}', [DashboardController::class, 'deleteUser']);
 Route::patch('/dashboard/account/update-password/{id}', [DashboardController::class, 'updatePassword']);
 Route::patch('/dashboard/account/update-details/{id}', [DashboardController::class, 'updateDetails']);
 
+Route::post('/dashboard/account/create-landlord', [DashboardController::class, 'createLandlord']);
 Route::get('/dashboard/select-account', [DashboardController::class, 'SelectAccount']);
 Route::post('/dashboard/assign-role', [DashboardController::class, 'assignRole']);
 
