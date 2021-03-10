@@ -9,6 +9,8 @@ $(document).ready(function(){
     $('.modal').modal();
     $('.fixed-action-btn').floatingActionButton();
     $('.tooltipped').tooltip();
+    $('input#input_text, textarea#textarea2').characterCounter();
+    $('.collapsible').collapsible();
 
 
   });

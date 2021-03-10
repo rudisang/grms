@@ -28,9 +28,9 @@ class AdminUserTable extends Component
             $search = request()->get('search');
             $users = User::where('email', 'like', '%'.$search.'%')->
             orWhere('name', 'like', '%'.$search.'%')->
-            orWhere('surname', 'like', '%'.$search.'%')->paginate(20);
+            orWhere('surname', 'like', '%'.$search.'%')->paginate(10);
           }else{
-            $users = User::all();
+            $users = User::orderBy('created_at','desc')->paginate(10);
           }
         return view('components.admin-user-table')->with('users', $users);
     }

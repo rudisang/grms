@@ -26,6 +26,15 @@ class DatabaseSeeder extends Seeder
             ['role' => 'Admin'],
         ))
         ->create();
+
+        \App\Models\Status::factory()->count(4)
+        ->state(new Sequence(
+            ['status' => 'Pending'],
+            ['status' => 'Approved'],
+            ['status' => 'Rejected'],
+            ['status' => 'Suspended'],
+        ))
+        ->create();
   
     }
 }
