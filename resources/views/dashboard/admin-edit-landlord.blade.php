@@ -4,8 +4,8 @@
 <nav class="black">
     <div class="container">
         <div class="nav-wrapper">
-            <a href="/dashboard" class="breadcrumb teal-text">{{Auth::user()->role->role}} Dashboard</a> 
-            <a href="/dashboard" class="breadcrumb teal-text">Manage Account</a>
+            <a href="/dashboard" class="breadcrumb indigo-text">{{Auth::user()->role->role}} Dashboard</a> 
+            <a href="/dashboard" class="breadcrumb indigo-text">Manage Account</a>
             <a class="breadcrumb grey-text">{{$landlord->user->name}} {{$landlord->user->surname}}</a>
         </div>
     </div>

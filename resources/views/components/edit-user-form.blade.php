@@ -88,7 +88,7 @@
 
           </div>
      
-        <button href="#" class="btn teal">Update Account</button>
+        <button href="#" class="btn indigo">Update Account</button>
       </form>
     </div>
   </div>

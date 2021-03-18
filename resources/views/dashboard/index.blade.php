@@ -4,7 +4,7 @@
 <nav class="white">
   <div class="container">
       <div class="nav-wrapper">
-          <a href="#!" class="breadcrumb teal-text">Dashboard</a>
+          <a href="#!" class="breadcrumb indigo-text">Dashboard</a>
       </div>
   </div>
 </nav>
@@ -50,12 +50,12 @@
                 @elseif(Auth::user()->landlordaccount->status_id == 2)
                         <!-- Approved -->
                 <div class="fixed-action-btn">
-                  <a class="btn-floating btn-large teal">
+                  <a class="btn-floating btn-large indigo">
                     <i class="large material-icons">add</i>
                   </a>
                   <ul>
-                    <li><a class="btn-floating teal"><i class="material-icons">home</i></a></li>
-                    <li><a class="btn-floating teal"><i class="material-icons">mode_edit</i></a></li>
+                    <li><a class="btn-floating indigo"><i class="material-icons">home</i></a></li>
+                    <li><a class="btn-floating indigo"><i class="material-icons">mode_edit</i></a></li>
                   </ul>
                 </div>
                 <div class="row">
@@ -94,10 +94,10 @@
            @else 
            <div class="card-panel blue lighten-2">
             <div class="white-text" role="alert">
-                🛈 Almost There! Setup Your Landlord account inorder to get started. 
+                🛈 Almost There! Setup Your Recruiter account inorder to get started. 
               </div>
             </div>
-            <a href="/dashboard/account/create-landlord" class="btn teal pulse">Setup Account</a>
+            <a href="/dashboard/account/create-landlord" class="btn indigo pulse">Setup Account</a>
            @endif
              
 

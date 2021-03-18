@@ -125,7 +125,7 @@
         
                   </div>
              
-                <button href="#" class="btn teal">Save</button>
+                <button href="#" class="btn indigo">Save</button>
               </form>
             </div>
           </div>

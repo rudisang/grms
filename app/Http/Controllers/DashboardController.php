@@ -129,6 +129,7 @@ class DashboardController extends Controller
         }
     }
 
+    
     public function editLandlord($id){
         $landlord = Landlord::find($id);
 

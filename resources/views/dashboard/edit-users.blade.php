@@ -4,8 +4,8 @@
 <nav class="black">
     <div class="container">
         <div class="nav-wrapper">
-            <a href="/dashboard" class="breadcrumb teal-text">{{Auth::user()->role->role}} Dashboard</a> 
-            <a href="/dashboard" class="breadcrumb teal-text">Manage User</a>
+            <a href="/dashboard" class="breadcrumb indigo-text">{{Auth::user()->role->role}} Dashboard</a> 
+            <a href="/dashboard" class="breadcrumb indigo-text">Manage User</a>
             <a class="breadcrumb grey-text">{{$user->name}} {{$user->surname}}</a>
         </div>
     </div>
@@ -103,7 +103,7 @@
     
               </div>
          
-            <button href="#" class="btn teal">Update Account</button>
+            <button href="#" class="btn indigo">Update Account</button>
           </form>
         </div>
       </div>
@@ -150,7 +150,7 @@
 
  
      
-        <button href="#" class="btn teal">Update Password</button>
+        <button href="#" class="btn indigo">Update Password</button>
       </form>
     </div>
   </div>

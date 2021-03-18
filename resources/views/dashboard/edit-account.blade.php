@@ -4,8 +4,8 @@
 <nav class="black">
     <div class="container">
         <div class="nav-wrapper">
-            <a href="/dashboard" class="breadcrumb teal-text">Dashboard</a> 
-            <a href="/dashboard/account" class="breadcrumb teal-text">My Account</a>
+            <a href="/dashboard" class="breadcrumb indigo-text">Dashboard</a> 
+            <a href="/dashboard/account" class="breadcrumb indigo-text">My Account</a>
             <a class="breadcrumb grey-text">{{Auth::user()->email}}</a>
         </div>
     </div>

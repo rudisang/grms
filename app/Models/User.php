@@ -53,4 +53,8 @@ class User extends Authenticatable
     public function landlordaccount() {
         return $this->hasOne('App\Models\Landlord');
     }
+
+    public function company(){
+        return $this->hasOne('App\Models\Company');
+    }
 }

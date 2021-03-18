@@ -4,8 +4,8 @@
 <nav class="black">
     <div class="container">
         <div class="nav-wrapper">
-            <a href="/dashboard" class="breadcrumb teal-text">{{Auth::user()->role->role}} Dashboard</a> 
-            <a href="/dashboard" class="breadcrumb teal-text">Manage User</a>
+            <a href="/dashboard" class="breadcrumb indigo-text">{{Auth::user()->role->role}} Dashboard</a> 
+            <a href="/dashboard" class="breadcrumb indigo-text">Manage User</a>
             <a class="breadcrumb grey-text">{{Auth::user()->name}} {{Auth::user()->surname}}</a>
         </div>
     </div>
@@ -138,7 +138,7 @@
     
               </div>
          
-            <button href="#" class="btn teal">Create Account</button>
+            <button href="#" class="btn indigo">Create Account</button>
           </form>
         </div>
       </div>
