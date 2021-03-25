@@ -22,6 +22,7 @@ class CreateCompaniesTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('logo');
+            $table->text('bio');
             $table->timestamps();
         });
     }

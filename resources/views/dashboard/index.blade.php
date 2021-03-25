@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col s12">
                   <div class="card-panel">
-                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Create Your Student Profile</a>
+                    <a class="waves-effect waves-light btn modal-trigger indigo" href="#modal1">Create Your Graduate Profile</a>
                   </div>
                 </div>
               </div>
@@ -39,73 +39,30 @@
 
         @elseif(Auth::user()->role_id == 2)
         
-        <!-- Landlord Dashboard Views -->
-           @if(Auth::user()->landlordaccount) 
-              @if (Auth::user()->landlordaccount->status_id == 1)
-                <div class="card-panel blue lighten-2">
-                    <div class="white-text" role="alert">
-                        🛈 Your Account is Under Review
-                      </div>
-                </div>
-                @elseif(Auth::user()->landlordaccount->status_id == 2)
-                        <!-- Approved -->
-                <div class="fixed-action-btn">
-                  <a class="btn-floating btn-large indigo">
-                    <i class="large material-icons">add</i>
-                  </a>
-                  <ul>
-                    <li><a class="btn-floating indigo"><i class="material-icons">home</i></a></li>
-                    <li><a class="btn-floating indigo"><i class="material-icons">mode_edit</i></a></li>
-                  </ul>
-                </div>
-                <div class="row">
-                  <div class="col s12">
-                    <div class="card-panel">
-                      <h5>My Listings</h5>
-                    </div>
-                  </div>
-                </div>
-                @elseif(Auth::user()->landlordaccount->status_id == 3)
-                        <!-- Rejected -->
-                        <div class="card-panel red lighten-1" >
-                          <div class="white-text" role="alert">
-                              <h5>🛈 Your Account has been rejected</h5>
-                            </div>
+            @if(Auth::user()->company)
+              <a href="" class="btn indigo">Create Job Post</a>
 
-                      </div>
-                      <ul class="collapsible" style="border:none">
-                        <li>
-                          <div class="collapsible-header"><i class="material-icons black-text">info</i><strong>Reason</strong></div>
-                          <div class="collapsible-body"><p class="black-text">Please make not of the requested changes and resubmit for review.</p>
-                            <p class="black-text">{{Auth::user()->landlordaccount->message}}</p></div>
-                        </li>
-                      </ul>
-                      <x-admin-edit-user-account />
-
-                @elseif(Auth::user()->landlordaccount->status_id == 4)
-                        <!-- Suspended -->
-                        <div class="card-panel yellow">
-                          <div class="black-text" role="alert">
-                              🛈 Your Account has been suspended
-                            </div>
-                      </div>
-                @endif
-           
-           @else 
-           <div class="card-panel blue lighten-2">
-            <div class="white-text" role="alert">
-                🛈 Almost There! Setup Your Recruiter account inorder to get started. 
+              <div class="row">
+                <div class="card-panel" style="padding:10px">
+                  <h5>My Job Posts</h5>
+                </div>
               </div>
-            </div>
-            <a href="/dashboard/account/create-landlord" class="btn indigo pulse">Setup Account</a>
-           @endif
+            @else
+            <div class="card-panel blue lighten-2">
+              <div class="white-text" role="alert">
+                  🛈 Almost There! Setup Your Recruiter account inorder to get started. 
+                </div>
+              </div>
+              <a href="/dashboard/create-company" class="btn indigo pulse">Setup Account</a>
+     
+            @endif
              
 
            
             @elseif(Auth::user()->role_id == 3)
             <x-admin-user-table />
 
-            <x-admin-landlord-table />
+   
         @endif
     </section>
     

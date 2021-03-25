@@ -1,5 +1,11 @@
 <div>
 
+    @if(Auth::user()->company)
+    <div class="card-panel">
+      <a href="" class="btn indigo">Manage Company Account</a>
+    </div>
+    @endif
+
     <div class="card-panel">
        
         <h4>Edit User Details</h4>
@@ -72,7 +78,7 @@
              <div class="input-field col s12 m6">
                 <select name="role_id" style="display: block">
                     <option value="1" selected='selected'>Student</option>
-                    <option value="2">Landlord</option>
+                    <option value="2">Recruiter</option>
                 </select>
                 @if ($errors->has('role_id'))
                 <span class="help-block">

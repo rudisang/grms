@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Landlord;
+use App\Models\Company;
 
 
 class DashboardController extends Controller
@@ -116,175 +116,60 @@ class DashboardController extends Controller
 
     }
 
-    public function landlordForm(){
-        if(Auth::user()->role_id == 2){
-            if(Auth::user()->landlordaccount){
-                return redirect('/dashboard')->with("warning", "Your account has already been created");
-            }else{
-                return view('/dashboard/create-landlord');
-
-            }
-        }else{
-            return view('/dashboard')->with("error", "Access Denied");
-        }
-    }
-
-    
-    public function editLandlord($id){
-        $landlord = Landlord::find($id);
-
-        // Check for correct user
-        if(auth()->user()->role_id !== 3){
-            return redirect('/dashboard')->with('error', 'Access Denied');
-        }
-
-        return view('/dashboard.admin-edit-landlord')->with('landlord', $landlord);
-    }
-
-    public function landlordAction(Request $request, $id){
-        if($request->has('message')){
-            $message = $request->message; 
-        }
-
-        $landlord = Landlord::find($id);
-        $landlord->status_id = intval($request->action);
-        if($request->has('message')){
-            $landlord->message = $message;
-        }
-        
-        $landlord->save();
-        return back()->with('success', 'Account Updated');
-    }
-
-
-    public function createLandlord(Request $request){
-
-
-        $request->validate([
-            'avatar' => 'image|nullable|max:1999',
-            'omang'=> 'required',
-            'utility_doc' => 'required',
-            'occupation'=> 'required|string|max:255',
-            'employer'=> 'required|string|max:255',
-            'employer_email' => 'required|string|email|max:255',
-            'address'=> 'required|string|max:255',
-            'bio'=> 'required',
-        ]);
-       
-       
-
-        if($request->hasFile('avatar')){
-            $avatar = $request->avatar->getClientOriginalName().time().'.'.$request->avatar->extension();  
-          // $request->avatar->public_path('avatars', $avatar);
-          $request->avatar->move(public_path('avatars'), $avatar);
-
-
-        } else {
-            $avatar = 'noimage.jpg';
-        }
-
-        if($request->hasFile('omang')){
-            $omang = $request->omang->getClientOriginalName().time().'.'.$request->omang->extension();  
-       //$request->omang->public_path('documents', $omang);
-       $request->omang->move(public_path('documents'), $omang);
-       
-        }
-        
-        if($request->hasFile('utility_doc')){
-            $utility_doc = $request->utility_doc->getClientOriginalName().time().'.'.$request->utility_doc->extension();  
-          // $request->utility_doc->public_path('documents', $utility_doc);
-          $request->utility_doc->move(public_path('documents'), $utility_doc);
-        }
-        
-
-        $account = new Landlord;
-
-        $account->avatar = $avatar;
-        $account->omang = $omang;
-        $account->utility_doc = $utility_doc;
-        $account->occupation = $request->occupation;
-        $account->employer = $request->employer;
-        $account->employer_email = $request->employer_email;
-        $account->address = $request->address;
-        $account->bio = $request->bio;
-        $account->status_id = 1;
-        $account->user_id = Auth::user()->id;
-        
-       
-        $account->save();
-        
-        return redirect('/dashboard')->with("success", "Your Account has been created");
-    }
 
     public function deleteUser($id){
        
 		$user = User::find($id);
       
         $user->delete();
-        $user->landlordaccount->delete();
  
         return redirect('/dashboard')->with("success", "User ".$user->name." ".$user->surname." was successfully Deleted");
 
     }
 
-    public function landlordResubmission(Request $request, $id){
-        
+    public function createCompany()
+    {
+        if(Auth::user()->role_id != 2){
+            return back()->with('error', 'You can not view this page');
+        }else{
+            return view('dashboard.create-company');
+        }
 
+
+    }
+
+    public function storeCompany(Request $request)
+    {
         $request->validate([
-            'avatar' => 'image|nullable|max:1999',
-            'omang'=> 'required',
-            'utility_doc' => 'required',
-            'occupation'=> 'required|string|max:255',
-            'employer'=> 'required|string|max:255',
-            'employer_email' => 'required|string|email|max:255',
-            'address'=> 'required|string|max:255',
-            'bio'=> 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'logo' => 'required|image|max:1999',
+            'physical_address' => 'required|string|max:255',
+            'postal_address' => 'required|string|max:255',
+            'phone' => 'required',
+            'bio' => 'required',
         ]);
-       
-       
 
-        if($request->hasFile('avatar')){
-            $avatar = $request->avatar->getClientOriginalName().time().'.'.$request->avatar->extension();  
-          // $request->avatar->public_path('avatars', $avatar);
-          $request->avatar->move(public_path('avatars'), $avatar);
+        if($request->hasFile('logo')){
+            $logo = $request->logo->getClientOriginalName().time().'.'.$request->logo->extension();  
+            $request->logo->move(public_path('logos'), $logo);
+        } 
 
+        $account = new Company;
 
-        } else {
-            $avatar = 'noimage.jpg';
-        }
-
-        if($request->hasFile('omang')){
-            $omang = $request->omang->getClientOriginalName().time().'.'.$request->omang->extension();  
-       //$request->omang->public_path('documents', $omang);
-       $request->omang->move(public_path('documents'), $omang);
-       
-        }
-        
-        if($request->hasFile('utility_doc')){
-            $utility_doc = $request->utility_doc->getClientOriginalName().time().'.'.$request->utility_doc->extension();  
-          // $request->utility_doc->public_path('documents', $utility_doc);
-          $request->utility_doc->move(public_path('documents'), $utility_doc);
-        }
-        
-
-        $account = Landlord::find($id);
-
-        $account->avatar = $avatar;
-        $account->omang = $omang;
-        $account->utility_doc = $utility_doc;
-        $account->occupation = $request->occupation;
-        $account->employer = $request->employer;
-        $account->employer_email = $request->employer_email;
-        $account->address = $request->address;
+        $account->name = $request->name;
+        $account->email = $request->email;
+        $account->physical_address = $request->physical_address;
+        $account->postal_address = $request->postal_address;
+        $account->phone = $request->phone;
         $account->bio = $request->bio;
-        $account->status_id = 1;
-        $account->message = null;
-        $account->user_id = Auth::user()->id;
-        
-       
+        $account->logo = $logo;
+        $account->user_id = auth()->user()->id;
+
         $account->save();
-        
-        return redirect('/dashboard')->with("success", "Resubmission Successful");
+
+        return redirect('/dashboard')->with('success', 'Account Created');
+
     }
 
     public function index()

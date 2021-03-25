@@ -86,8 +86,8 @@
                  @if($user->role_id == 1)
                  <div class="input-field col s12 m6">
                     <select name="role_id" style="display: block">
-                        <option value="1" selected='selected'>Student</option>
-                        <option value="2">Landlord</option>
+                        <option value="1" selected='selected'>Graduate</option>
+                        <option value="2">Recruiter</option>
                     </select>
                     @if ($errors->has('role_id'))
                     <span class="help-block">

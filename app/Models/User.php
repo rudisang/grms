@@ -50,10 +50,6 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role');
     }
 
-    public function landlordaccount() {
-        return $this->hasOne('App\Models\Landlord');
-    }
-
     public function company(){
         return $this->hasOne('App\Models\Company');
     }

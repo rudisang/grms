@@ -15,7 +15,7 @@
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons indigo-text">menu</i></a>
 
             <!-- PROJECT LOGO-->
-            <a href="#!" class="brand-logo indigo-text"><img style="margin-top:10px" width=150 src="{{asset('images/logo.png')}}" alt=""></a>
+            <a href="#!" class="brand-logo indigo-text"><img style="margin-top:10px" width=50 src="{{asset('images/logo.png')}}" alt=""></a>
             <ul class="right hide-on-med-and-down">
               <li><a href="#" class="indigo-text">Housing</a></li>
               <li><a href="#" class="indigo-text">How it Works</a></li>
