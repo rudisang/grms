@@ -28,7 +28,7 @@
             <div>
                 <x-label for="mobile" :value="__('Mobile')" />
 
-                <x-input id="mobile" min=71111111 max=71999999 class="block mt-1 w-full" type="number" name="mobile" :value="old('mobile')" required/>
+                <x-input id="mobile" min=71111111 max=77999999 class="block mt-1 w-full" type="number" name="mobile" :value="old('mobile')" required/>
             </div>
 
             <div>

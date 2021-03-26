@@ -2,7 +2,7 @@
 
     @if(Auth::user()->company)
     <div class="card-panel">
-      <a href="" class="btn indigo">Manage Company Account</a>
+      <a href="" class="btn indigo accent-1">Manage Company Account</a>
     </div>
     @endif
 
@@ -94,7 +94,7 @@
 
           </div>
      
-        <button href="#" class="btn indigo">Update Account</button>
+        <button href="#" class="btn indigo accent-1">Update Account</button>
       </form>
     </div>
   </div>

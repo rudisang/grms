@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-
+use App\Models\Company;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/companies', function () {
+    $companies = Company::all();
+    return view('companies')->with('companies', $companies);
+});
+
+Route::get('/companies/{id}', function ($id) {
+    $company = Company::find($id);
+    return view('show-company')->with('company', $company);
+});
+
 //RECRUITER ROUTES
+Route::get('/search/company', [DashboardController::class, 'searchCompany']);
 Route::get('/dashboard/create-company', [DashboardController::class, 'createCompany']);
 Route::post('/dashboard/create-company', [DashboardController::class, 'storeCompany']);
 //RECRUITER ROUTES

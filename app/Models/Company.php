@@ -16,6 +16,7 @@ class Company extends Model
         'email',
         'phone',
         'logo',
+        'verified'
     ];
    
 

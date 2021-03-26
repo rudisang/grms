@@ -22,6 +22,20 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
+    public function searchCompany(Request $request){
+
+        if(request()->has('search')){
+            $search = request()->get('search');
+            $companies = Company::Where('name', 'like', '%'.$search.'%')
+            ->paginate(20);
+          }else{
+            $companies = Company::orderBy('created_at','desc')->paginate(20);
+          }          
+        
+        return view('/companies')->with('companies', $companies);
+
+    }
+
     public function assignRole(Request $request){
 
         $user = User::find(auth()->user()->id);
@@ -138,12 +152,13 @@ class DashboardController extends Controller
 
     }
 
+
     public function storeCompany(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'logo' => 'required|image|max:1999',
+            'email' => 'required|string|email|max:255|unique:companies',
+            'logo' => 'image|max:1999',
             'physical_address' => 'required|string|max:255',
             'postal_address' => 'required|string|max:255',
             'phone' => 'required',
@@ -153,7 +168,9 @@ class DashboardController extends Controller
         if($request->hasFile('logo')){
             $logo = $request->logo->getClientOriginalName().time().'.'.$request->logo->extension();  
             $request->logo->move(public_path('logos'), $logo);
-        } 
+        } else{
+            $logo = "no_image.png";
+        }
 
         $account = new Company;
 
@@ -164,6 +181,7 @@ class DashboardController extends Controller
         $account->phone = $request->phone;
         $account->bio = $request->bio;
         $account->logo = $logo;
+        $account->verified = 0;
         $account->user_id = auth()->user()->id;
 
         $account->save();

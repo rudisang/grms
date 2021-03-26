@@ -24,7 +24,7 @@
             @csrf
             <div class="row">
                 <div class="input-field file-field col s12 m6">
-                    <div class="btn indigo">
+                    <div class="btn indigo accent-1">
                         <span><i class="material-icons">cloud_upload</i></span>
                         <input name="logo" type="file">
                       </div>
@@ -111,7 +111,7 @@
     
               </div>
          
-            <button href="#" class="btn indigo">Create Account</button>
+            <button href="#" class="btn indigo accent-1">Create Account</button>
           </form>
         </div>
       </div>

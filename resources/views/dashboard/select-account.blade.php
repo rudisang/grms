@@ -21,7 +21,7 @@
                 <form action="/dashboard/assign-role" method="POST">
                   @csrf
                   <input type="hidden" name="role" value="{{$roles[0]->id}}">
-                  <button href="#" class="btn indigo">Create Account</button>
+                  <button href="#" class="btn indigo accent-1">Create Account</button>
                 </form>
               </div>
             </div>
@@ -36,7 +36,7 @@
                   <form action="/dashboard/assign-role" method="POST">
                     @csrf
                     <input type="hidden" name="role" value="{{$roles[1]->id}}">
-                    <button href="#" class="btn indigo">Create Account</button>
+                    <button href="#" class="btn indigo accent-1">Create Account</button>
                   </form>
                 </div>
               </div>

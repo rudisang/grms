@@ -39,7 +39,7 @@
 
  
      
-        <button href="#" class="btn indigo">Update Password</button>
+        <button href="#" class="btn indigo accent-1">Update Password</button>
       </form>
     </div>
   </div>

@@ -125,7 +125,7 @@
         
                   </div>
              
-                <button href="#" class="btn indigo">Save</button>
+                <button href="#" class="btn indigo accent-1">Save</button>
               </form>
             </div>
           </div>

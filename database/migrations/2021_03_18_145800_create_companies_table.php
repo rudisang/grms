@@ -21,8 +21,9 @@ class CreateCompaniesTable extends Migration
             $table->string('postal_address');
             $table->string('email');
             $table->string('phone');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->text('bio');
+            $table->boolean('verified');
             $table->timestamps();
         });
     }

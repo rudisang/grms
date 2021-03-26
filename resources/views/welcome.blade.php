@@ -27,6 +27,9 @@
 
   <div class="container">
     
+    <div class="card-panel">
+      
+    </div>
       
   </div>
 @endsection

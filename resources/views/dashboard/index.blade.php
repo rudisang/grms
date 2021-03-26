@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col s12">
                   <div class="card-panel">
-                    <a class="waves-effect waves-light btn modal-trigger indigo" href="#modal1">Create Your Graduate Profile</a>
+                    <a class="waves-effect waves-light btn modal-trigger indigo accent-1" href="#modal1">Create Your Graduate Profile</a>
                   </div>
                 </div>
               </div>
@@ -40,7 +40,7 @@
         @elseif(Auth::user()->role_id == 2)
         
             @if(Auth::user()->company)
-              <a href="" class="btn indigo">Create Job Post</a>
+              <a href="" class="btn indigo accent-1">Create Job Post</a>
 
               <div class="row">
                 <div class="card-panel" style="padding:10px">
@@ -53,7 +53,7 @@
                   🛈 Almost There! Setup Your Recruiter account inorder to get started. 
                 </div>
               </div>
-              <a href="/dashboard/create-company" class="btn indigo pulse">Setup Account</a>
+              <a href="/dashboard/create-company" class="btn indigo accent-1 pulse">Setup Account</a>
      
             @endif
              
