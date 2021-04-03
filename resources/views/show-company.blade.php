@@ -8,7 +8,7 @@
             <div class="caption center-align">
                     <img style="width:140px" class="circle responsive-img" src="{{asset('logos/'.$company->logo)}}" alt="">
               <h3>{{$company->name}} @if($company->verified)<i class="material-icons blue" style="padding:3px;border-radius:100%">check</i>@endif</h3>
-              <h5 class="light grey-text text-lighten-3">Affordable Student Housing.</h5>
+              <h5 class="light grey-text text-lighten-3">  <a class="waves-effect waves-light btn modal-trigger indigo accent-1" href="#modal1">company details</a></h5>
             </div>
           </li>
     
@@ -17,7 +17,7 @@
     
   <div class="container">
         <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger indigo accent-1" href="#modal1">company details</a>
+
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
@@ -38,10 +38,34 @@
       <a href="#!" class="modal-close waves-effect waves-green btn-flat indigo accent-1">close</a>
     </div>
   </div>
-
-      <div class="card-panel">
-            <h5>Job Posts</h5>
-            <hr>
+  <h5>Job Posts</h5>
+      <div class="card-panel" style="border-radius:20px">
+      
+           
+            @if($company->jobposts->count() > 0)
+            <div class="row">
+              @foreach ($company->jobposts as $job)
+              <div class="col s12 m6">
+               <div class="card grey lighten-3 z-depth-0" style="border-radius:20px">
+                <div class="card-content white-text">
+                  
+                  <span class="card-title black-text">{{$job->title}}</span>
+                  <p class="black-text">Application Deadline</p>
+                  <p class="btn indigo accent-1 z-depth-0">{{date("F jS, Y", strtotime($job->deadline))}}</p>
+                
+                </div>
+                <div class="card-action">
+                  <a class="black-text" href="">{{$job->created_at->diffForHumans()}}</a>
+                  <a class="black-text" href="/jobs/{{$job->id}}">view</a>
+                </div>
+              </div>
+            </div>
+               @endforeach
+            </div>
+                
+              @else
+              <p class="grey-text center">No Job Posts Yet!</p>
+            @endif
 
           </div>
   </div>

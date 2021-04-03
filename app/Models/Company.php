@@ -24,6 +24,10 @@ class Company extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function jobposts() {
+        return $this->hasMany('App\Models\JobPost');
+    }
+
     public function status() {
         return $this->belongsTo('App\Models\Status');
     }

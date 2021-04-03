@@ -12,6 +12,18 @@
          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
          <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
          <style>
+           .view-btn:hover{
+             
+             border:1px solid black;
+             padding:10px;
+             background: black;
+             color:white !important;
+             border-radius:10px;
+             transition:1s;
+           }
+           .view-btn{
+             transition:1s !important;
+           }
              body{
                  background-color: #F3F4F6;
                 font-family: 'Raleway', sans-serif;
@@ -25,6 +37,9 @@
              }
 
              .gutter-sizer { width: 1%; }
+             .btn{
+               text-transform: lowercase !important;
+             }
 
 
 /* clear fix */

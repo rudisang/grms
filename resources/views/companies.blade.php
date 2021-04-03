@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <div class="container" style="margin-bottom:10px">
-  <div class="card-panel">
+  <div class="card-panel z-depth-0 grey lighten-4">
       <form action="/search/company" method="get">
           <input type="search" placeholder="search company" name="search" id="">
       </form>
@@ -21,7 +21,7 @@
                   <div class="card-content">
                  @guest
                      @else
-                     @if($company->user_id == Auth::user()->id) <a href="" class="btn amber">edit</a>@endif
+                     @if($company->user_id == Auth::user()->id) <a href="/dashboard/edit-company/{{$company->id}}" class="btn amber">edit</a>@endif
                  @endguest
                   <a href="/companies/{{$company->id}}" class="btn indigo accent-1">view</a>
                   </div>

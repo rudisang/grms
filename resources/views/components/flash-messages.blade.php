@@ -9,7 +9,7 @@
             </div>
             @endif
         
-            @if ($message = Session::get('success'))    <div class="card-panel green lighten-1">
+            @if ($message = Session::get('success'))    <div class="card-panel green lighten-3">
                 <div class="white-text" role="alert">
                     ✔️ {{ $message }}
                   </div>

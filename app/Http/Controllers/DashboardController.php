@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Company;
-
+use App\Models\JobPost;
+use App\Models\Category;
 
 class DashboardController extends Controller
 {
@@ -152,6 +153,56 @@ class DashboardController extends Controller
 
     }
 
+    public function editCompany($id)
+    {
+        if(Auth::user()->role_id != 2){
+            return back()->with('error', 'You can not view this page');
+        }else{
+            $company = Company::find($id);
+            return view('dashboard.edit-company')->with('company',$company);
+        }
+
+
+    }
+
+    public function updateCompany(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'physical_address' => 'required|string|max:255',
+            'postal_address' => 'required|string|max:255',
+            'phone' => 'required',
+            'bio' => 'required',
+        ]);
+
+        if($request->hasFile('logo')){
+            $request->validate([
+                'logo' => 'image|max:1999',
+            ]);
+            $logo = $request->logo->getClientOriginalName().time().'.'.$request->logo->extension();  
+            $request->logo->move(public_path('logos'), $logo);
+        }
+
+        $account = Company::find($id);
+
+        $account->name = $request->name;
+        $account->email = $request->email;
+        $account->physical_address = $request->physical_address;
+        $account->postal_address = $request->postal_address;
+        $account->phone = $request->phone;
+        $account->bio = $request->bio;
+        if($request->hasFile('logo')){
+            $account->logo = $logo;
+        }
+        
+
+        $account->save();
+
+        return redirect('/dashboard')->with('success', 'Company Account Updated');
+
+    }
+
 
     public function storeCompany(Request $request)
     {
@@ -193,7 +244,10 @@ class DashboardController extends Controller
     public function index()
     {
         $roles = Role::all();
+        $categories = Category::all();
+        //$jobposts = JobPost::find();
         if(Auth::user()->role_id){
+    
             return view('dashboard.index');
     
         }else{
@@ -201,6 +255,90 @@ class DashboardController extends Controller
     
         }
 
+    }
+
+
+    /********************************************************************
+     * JOB POST FUNCTIONS
+     ********************************************************************
+     */
+    public function createJobPost()
+    {
+        $categories = Category::orderBy('name','asc')->get();
+        return view('dashboard.create-job-post')->with('categories',$categories);
+    }
+
+    public function storeJobPost(Request $request)
+    {
+        $request->validate([
+        'title'  => 'required|string|max:255',
+        'category_id'  => 'required',
+        'position' => 'required|string|max:255',
+        'details' => 'required',
+        'deadline' => 'required|date|after:today',
+        ]);
+
+        $job = new JobPost;
+        $job->company_id = auth()->user()->company->id;
+        $job->title = $request->title;
+        $job->category_id = intval($request->category_id);
+        $job->position = $request->position;
+        $job->deadline = $request->deadline;
+        $job->details = $request->details;
+        
+        $job->save();
+
+        return redirect('/dashboard')->with('success','New Job Post Added');
+    }
+
+    public function editJobPost(Request $request, $id)
+    {
+        $request->validate([
+        'title'  => 'required|string|max:255',
+        'category_id'  => 'required',
+        'position' => 'required|string|max:255',
+        'details' => 'required',
+        'deadline' => 'required|date|after:today',
+        ]);
+
+        $job = JobPost::find($id);
+        $job->title = $request->title;
+        $job->category_id = intval($request->category_id);
+        $job->position = $request->position;
+        $job->deadline = $request->deadline;
+        $job->details = $request->details;
+        
+        $job->save();
+
+        return redirect('/dashboard')->with('success','Job Post Updated');
+    }
+
+    public function storeJobCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories',
+        ]);
+
+        $cat = new Category;
+        $cat->name = $request->name;
+
+        $cat->save();
+
+        return back()->with('success','Category Added');
+    }
+
+    public function editJobCategory(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $cat = Category::find($id);
+        $cat->name = $request->name;
+
+        $cat->save();
+
+        return back()->with('success','Success');
     }
 
     /**

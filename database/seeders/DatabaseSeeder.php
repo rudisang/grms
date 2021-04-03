@@ -27,6 +27,22 @@ class DatabaseSeeder extends Seeder
         ))
         ->create();
 
+        \App\Models\Category::factory()->count(11)
+        ->state(new Sequence(
+            ['name' => 'Accounting'],
+            ['name' => 'Finance'],
+            ['name' => 'Programming'],
+            ['name' => 'Computer Science'],
+            ['name' => 'Information Technology'],
+            ['name' => 'Sales'],
+            ['name' => 'Marketing'],
+            ['name' => 'Tourism'],
+            ['name' => 'Hospitality'],
+            ['name' => 'Health'],
+            ['name' => 'Freelance'],
+        ))
+        ->create();
+
         \App\Models\Status::factory()->count(4)
         ->state(new Sequence(
             ['status' => 'Pending'],

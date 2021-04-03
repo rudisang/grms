@@ -40,11 +40,20 @@
         @elseif(Auth::user()->role_id == 2)
         
             @if(Auth::user()->company)
-              <a href="" class="btn indigo accent-1">Create Job Post</a>
+              
 
               <div class="row">
-                <div class="card-panel" style="padding:10px">
-                  <h5>My Job Posts</h5>
+                <h5>My Job Posts</h5>
+                <div class="card-panel" style="padding-left:20px;border-radius:20px">
+
+                  <a href="/dashboard/job-post/create" class="btn indigo accent-1">Create Job Post</a>
+                  <br>
+                  @if(Auth::user()->company->jobposts->count() > 0)
+                    <x-user-job-posts-table />
+                  @else
+                  <p class="grey-text center">No Job Posts Yet</p>
+                  @endif
+                 
                 </div>
               </div>
             @else
@@ -61,7 +70,7 @@
            
             @elseif(Auth::user()->role_id == 3)
             <x-admin-user-table />
-
+            <x-admin-category-table />
    
         @endif
     </section>
