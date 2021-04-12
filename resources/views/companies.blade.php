@@ -10,13 +10,14 @@
   <div class="container">
     
         <div class="row">
+          @if($companies->count() > 0)
           @foreach($companies as $company)
               <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-image">
-                    <img src="{{asset('images/company_bg.jpg')}}">
+                <div class="card" style="border-radius:20px">
+                  <div class="card-image" >
+                    <img class="materialboxed dim" src="{{asset('covers/'.$company->cover)}}" style="border-radius:20px 20px 0px 0px">
                     <span class="card-title"> {{$company->name}} @if($company->verified)<i class="material-icons blue" style="font-size:15px;border-radius:100%">check</i>@endif</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light white"><img src="{{asset('logos/'.$company->logo)}}" alt=""></a>
+                  <a class="btn-floating halfway-fab waves-effect waves-light white"><img class="materialboxed" src="{{asset('logos/'.$company->logo)}}" alt=""></a>
                   </div>
                   <div class="card-content">
                  @guest
@@ -29,6 +30,12 @@
               </div>
            
           @endforeach
+
+          @else
+          <h4 class="grey-text center">Looks Like There's Nothing Here!</h4>
+          <img src="{{asset('images/nothing.gif')}}" style="display: block;margin:auto" alt="">
+        
+        @endif
       </div>
 
       

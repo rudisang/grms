@@ -17,6 +17,7 @@
             <!-- PROJECT LOGO-->
             <a href="/" class="brand-logo grey-text"><img class="dim" style="margin-top:10px" width=50 src="{{asset('images/logo.png')}}" alt=""></a>
             <ul class="right hide-on-med-and-down">
+              <li class="{{ request()->is('jobs') ? 'active' : '' }}"><a href="/jobs" class="grey-text">Jobs</a></li>
               <li class="{{ request()->is('companies') ? 'active' : '' }}"><a href="/companies" class="grey-text">Companies</a></li>
               <li><a href="#" class="grey-text">How it Works</a></li>
               @if (Route::has('login'))

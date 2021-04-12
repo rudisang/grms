@@ -48,7 +48,7 @@
       </div>
          @endforeach
          <br>
-         {{$jobs->links('/vendor/pagination/default')}}
+      <!--   {{$jobs->links('/vendor/pagination/default')}} -->
       </div>
           
         @else

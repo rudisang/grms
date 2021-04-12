@@ -12,11 +12,14 @@
          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
          <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
          <style>
+           .breadcrumb:before {
+    color: #6e6e6e;
+}
            .view-btn:hover{
              
-             border:1px solid black;
+             border:1px solid #8C9EFF;
              padding:10px;
-             background: black;
+             background: #8C9EFF;
              color:white !important;
              border-radius:10px;
              transition:1s;
@@ -92,5 +95,11 @@
      <script src="{{asset('js/materialize.min.js')}}"></script>
      <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
      <script src="{{asset('js/main.js')}}"></script>
+     <script src="{{asset('js/editor.js')}}"></script>
+     <script>
+       const editor = new EditorJS();
+     </script>
+     
+
 </body>
 </html>

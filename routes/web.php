@@ -32,6 +32,11 @@ Route::get('/companies/{id}', function ($id) {
     return view('show-company')->with('company', $company);
 });
 
+Route::get('/profile/create', [DashboardController::class, 'createProfile']);
+Route::post('/profile/create', [DashboardController::class, 'storeProfile']);
+Route::post('/attachment/create', [DashboardController::class, 'storeAttachment']);
+Route::patch('/attachment/edit/{id}', [DashboardController::class, 'updateAttachment']);
+
 //RECRUITER ROUTES
 Route::get('/search/company', [DashboardController::class, 'searchCompany']);
 Route::get('/dashboard/create-company', [DashboardController::class, 'createCompany']);

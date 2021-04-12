@@ -4,7 +4,7 @@
         <ul class="slides">
     
           <li>
-            <img class="dim" src="{{asset('images/company_bg.jpg')}}"> <!-- random image -->
+            <img class="dim" src="{{asset('covers/no_cover.jpg')}}"> <!-- random image -->
             <div class="caption center-align">
                     <img style="width:140px" class="circle responsive-img" src="{{asset('logos/'.$job->company->logo)}}" alt="">
               <h3>{{$job->title}} @if($job->company->verified)<i class="material-icons blue" style="padding:3px;border-radius:100%">check</i>@endif</h3>
@@ -13,7 +13,13 @@
               @if($date_now > $job->deadline)
               <a href="" class="btn red z-depth-0" disabled>Application Closed</a>
               @else
-              <a href="" class="btn blue">Apply</a>
+               @guest
+               <a href="/login" class="btn indigo accent-1">login to apply</a>
+                   @else
+                   @if (Auth::user()->role_id == 1)
+                        <a href="" class="btn blue">Apply</a>
+                   @endif
+               @endguest
               @endif
              
             </div>
@@ -23,7 +29,7 @@
       </div>
     
   <div class="container">
-       <div class="card-panel">
+       <div class="card-panel" style="border-radius: 20px">
            <div class="row">
                <div class="col s12 m4">
                 <h5>Application Deadline</h5>
@@ -44,10 +50,45 @@
        </div>
   </div>
 
+  <div class="container">
+ 
+        <div class="row">
+          <br>
+          <hr>
+         
+          <h5 style="margin-left: 20px">Similar Job Posts</h5>
+          @foreach ($jobs as $post)
+          @if ($job->id == $post->id)
+            
+          @else
+          <div class="col s12 m6">
+            <div class="card white" style="border-radius:20px">
+             <div class="card-content white-text">
+               
+               <span class="card-title black-text" style="font-weight: bold !important"><a class="card-title black-text" href="/jobs/{{$post->id}}">{{$post->title}}</a></span>
+          
+               <a class="black-text">Applications Close: <span  style="text-decoration: underline;font-weight:bold">{{date("F jS, Y", strtotime($post->deadline))}}</span></a>
+           
+               <span class="black-text"> |</span>
+               <a class="indigo-text view-btn" href="/jobs/{{$post->id}}">view</a>
+             </div>
+             <div class="card-action">
+               <img style="width:30px;position:absolute;margin-top:-5px" class="circle responsive-img" src="{{asset('logos/'.$post->company->logo)}}" alt=""> <span style="margin-left:35px;font-weight:900" class="black-text">{{$post->company->name}}</span>@if($post->company->verified) <i class="material-icons blue white-text" style="font-size:10px;border-radius:100%">check</i>@endif
+               <a class="white-text right btn indigo accent-1 z-depth-0" href="" style="margin-top: -5px">{{$post->created_at->diffForHumans()}}</a>
+             </div>
+           </div>
+         </div>
+          @endif
+           @endforeach
+        </div>
+      
+    
+</div>
+
   <script>
     // Set the date we're counting down to
     var countDownDate = new Date(<?php echo json_encode($job->deadline); ?>).getTime();
-    
+ 
     // Update the count down every 1 second
     var x = setInterval(function() {
     

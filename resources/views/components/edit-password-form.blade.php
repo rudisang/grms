@@ -1,5 +1,5 @@
 <div>
-    <div class="card-panel">
+    <div class="card-panel" style="border-radius:20px">
        
         <h4>Change User Password</h4>
     

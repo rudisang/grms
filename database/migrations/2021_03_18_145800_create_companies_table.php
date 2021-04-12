@@ -22,6 +22,7 @@ class CreateCompaniesTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('logo')->nullable();
+            $table->string('cover')->nullable();
             $table->text('bio');
             $table->boolean('verified');
             $table->timestamps();

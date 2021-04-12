@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<nav class="black">
+<nav class="white">
     <div class="container">
         <div class="nav-wrapper">
             <a href="/dashboard" class="breadcrumb indigo-text">{{Auth::user()->role->role}} Dashboard</a> 

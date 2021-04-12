@@ -4,7 +4,7 @@
         <ul class="slides">
     
           <li>
-            <img class="dim" src="{{asset('images/company_bg.jpg')}}"> <!-- random image -->
+            <img class="dim" src="{{asset('covers/'.$company->cover)}}"> <!-- random image -->
             <div class="caption center-align">
                     <img style="width:140px" class="circle responsive-img" src="{{asset('logos/'.$company->logo)}}" alt="">
               <h3>{{$company->name}} @if($company->verified)<i class="material-icons blue" style="padding:3px;border-radius:100%">check</i>@endif</h3>
@@ -39,7 +39,7 @@
     </div>
   </div>
   <h5>Job Posts</h5>
-      <div class="card-panel" style="border-radius:20px">
+      <div class="card-panel z-depth-0" style="border-radius:20px">
       
            
             @if($company->jobposts->count() > 0)

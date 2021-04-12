@@ -1,12 +1,12 @@
 <div>
 
     @if(Auth::user()->company)
-    <div class="card-panel">
+    <div class="card-panel" style="border-radius:20px">
       <a href="" class="btn indigo accent-1">Manage Company Account</a>
     </div>
     @endif
 
-    <div class="card-panel">
+    <div class="card-panel" style="border-radius:20px">
        
         <h4>Edit User Details</h4>
     

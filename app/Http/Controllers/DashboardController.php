@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Company;
 use App\Models\JobPost;
 use App\Models\Category;
+use App\Models\Attachment;
 
 class DashboardController extends Controller
 {
@@ -20,7 +21,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except'=>['searchCompany']]);
     }
 
     public function searchCompany(Request $request){
@@ -184,6 +185,14 @@ class DashboardController extends Controller
             $request->logo->move(public_path('logos'), $logo);
         }
 
+        if($request->hasFile('cover')){
+            $request->validate([
+                'cover' => 'image|max:1999',
+            ]);
+            $cover = $request->cover->getClientOriginalName().time().'.'.$request->cover->extension();  
+            $request->cover->move(public_path('covers'), $cover);
+        } 
+
         $account = Company::find($id);
 
         $account->name = $request->name;
@@ -194,6 +203,9 @@ class DashboardController extends Controller
         $account->bio = $request->bio;
         if($request->hasFile('logo')){
             $account->logo = $logo;
+        }
+        if($request->hasFile('cover')){
+            $account->cover = $cover;
         }
         
 
@@ -210,6 +222,7 @@ class DashboardController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:companies',
             'logo' => 'image|max:1999',
+            'cover' => 'image|max:1999',
             'physical_address' => 'required|string|max:255',
             'postal_address' => 'required|string|max:255',
             'phone' => 'required',
@@ -223,6 +236,13 @@ class DashboardController extends Controller
             $logo = "no_image.png";
         }
 
+        if($request->hasFile('cover')){
+            $cover = $request->cover->getClientOriginalName().time().'.'.$request->cover->extension();  
+            $request->cover->move(public_path('covers'), $cover);
+        } else{
+            $cover = "no_cover.jpg";
+        }
+
         $account = new Company;
 
         $account->name = $request->name;
@@ -231,6 +251,7 @@ class DashboardController extends Controller
         $account->postal_address = $request->postal_address;
         $account->phone = $request->phone;
         $account->bio = $request->bio;
+        $account->cover = $cover;
         $account->logo = $logo;
         $account->verified = 0;
         $account->user_id = auth()->user()->id;
@@ -339,6 +360,69 @@ class DashboardController extends Controller
         $cat->save();
 
         return back()->with('success','Success');
+    }
+
+    public function createProfile()
+    { 
+     return view('/dashboard.create-profile');
+    }
+
+    public function storeProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories',
+        ]);
+
+        $cat = new Category;
+        $cat->name = $request->name;
+
+        $cat->save();
+
+        return back()->with('success','Category Added');
+    }
+
+    public function storeAttachment(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'attachment' => 'required|image|max:1999',
+        ]);
+
+        if($request->hasFile('attachment')){
+            $attachment = $request->attachment->getClientOriginalName().time().'.'.$request->attachment->extension();  
+            $request->attachment->move(public_path('documents'), $attachment);
+        }
+
+        $att = new Attachment;
+        $att->title = $request->title;
+        $att->attachment = $attachment;
+        $att->user_id = Auth::user()->id;
+        $att->save();
+
+        return back()->with('success','New Attachment Added');
+    }
+
+    public function updateAttachment(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'attachment' => 'image|max:1999',
+        ]);
+
+        if($request->hasFile('attachment')){
+            $attachment = $request->attachment->getClientOriginalName().time().'.'.$request->attachment->extension();  
+            $request->attachment->move(public_path('documents'), $attachment);
+        }
+
+        $att = Attachment::find($id);
+        $att->title = $request->title;
+        if($request->hasFile('attachment')){
+        $att->attachment = $attachment;
+        }
+    
+        $att->save();
+
+        return back()->with('success','Attachment Updated');
     }
 
     /**

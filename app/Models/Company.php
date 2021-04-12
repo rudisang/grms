@@ -15,8 +15,10 @@ class Company extends Model
         'postal_address',
         'email',
         'phone',
+        'cover',
         'logo',
-        'verified'
+        'verified',
+        'bio'
     ];
    
 
