@@ -23,7 +23,7 @@
                 <td>{{$job->title}}</td>
                 <td>{{$job->deadline}}</td>
                 <td><a class="amber waves-effect waves-light btn modal-trigger" href="#{{$job->id}}">edit</a> </td>
-                <td><a class="indigo accent-1 waves-effect waves-light btn modal-trigger" href="#apps{{$job->id}}">applications(0)</a></td>
+                <td><a class="indigo accent-1 waves-effect waves-light btn modal-trigger" href="/applications/{{$job->id}}">applications({{$job->applications->count()}})</a></td>
               </tr>
 
               <div id="{{$job->id}}" class="modal white" >

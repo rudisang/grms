@@ -32,6 +32,10 @@ Route::get('/companies/{id}', function ($id) {
     return view('show-company')->with('company', $company);
 });
 
+Route::get('/apply/{id}', [DashboardController::class, 'applyForm']);
+Route::get('/applications/{id}', [DashboardController::class, 'viewApplications']);
+Route::post('/apply/{id}', [DashboardController::class, 'apply']);
+
 Route::get('/profile/create', [DashboardController::class, 'createProfile']);
 Route::post('/profile/create', [DashboardController::class, 'storeProfile']);
 Route::post('/attachment/create', [DashboardController::class, 'storeAttachment']);

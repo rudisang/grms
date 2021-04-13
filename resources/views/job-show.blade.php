@@ -17,7 +17,7 @@
                <a href="/login" class="btn indigo accent-1">login to apply</a>
                    @else
                    @if (Auth::user()->role_id == 1)
-                        <a href="" class="btn blue">Apply</a>
+                        <a href="/apply/{{$job->id}}" class="btn blue">Apply</a>
                    @endif
                @endguest
               @endif

@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\JobPost;
 use App\Models\Category;
 use App\Models\Attachment;
+use App\Models\Application;
 
 class DashboardController extends Controller
 {
@@ -430,9 +431,41 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function applyForm($id)
     {
-        //
+
+        $jobpost = JobPost::find($id);
+        return view('/dashboard.apply')->with('jobpost',$jobpost);
+    }
+
+    public function viewApplications($id)
+    {
+        $jobpost = JobPost::find($id);
+      
+        if(Auth::user()->id != $jobpost->company->user->id){
+            return back();
+        }else{
+            return view('/dashboard.applications')->with('jobpost',$jobpost);
+        }
+        
+    }
+
+    public function apply(Request $request, $id)
+    {
+        $request->validate([
+            'cover' => 'required',
+        ]);
+
+        $jobpost = JobPost::find($id);
+
+        $app = new Application;
+        $app->user_id = Auth::user()->id;
+        $app->job_post_id = $jobpost->id;
+        $app->cover = $request->cover;
+        $app->status = 0;
+dd($app->post);
+        $app->save();
+        return redirect('/dashboard')->with('success','Application Submitted. Good Luck 😃😃!');
     }
 
     /**

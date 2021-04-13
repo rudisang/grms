@@ -21,6 +21,10 @@ class JobPost extends Model
         return $this->belongsTo('App\Models\Company');
     }
 
+    public function applications() {
+        return $this->hasMany('App\Models\Application');
+    }
+
     public function category() {
         return $this->belongsTo('App\Models\Category');
     }

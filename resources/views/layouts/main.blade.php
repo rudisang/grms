@@ -97,8 +97,15 @@
      <script src="{{asset('js/main.js')}}"></script>
      <script src="{{asset('js/editor.js')}}"></script>
      <script>
-       const editor = new EditorJS();
-     </script>
+      ClassicEditor
+              .create( document.querySelector( '#editor' ) )
+              .then( editor => {
+                      console.log( editor );
+              } )
+              .catch( error => {
+                      console.error( error );
+              } );
+  </script>
      
 
 </body>
